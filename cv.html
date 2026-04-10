@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cv-section {
+      margin-bottom: 2.8rem;
+    }
+
+    .cv-section h2 {
+      font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: normal;
+      opacity: 0.45;
+      margin: 0 0 0;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .cv-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .cv-logo {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      border-radius: 4px;
+      filter: grayscale(100%);
+      opacity: 0.3;
+      transition: filter 0.25s ease, opacity 0.25s ease;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .cv-entry:hover .cv-logo {
+      filter: grayscale(0%);
+      opacity: 0.85;
+    }
+
+    .cv-logo-placeholder {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .cv-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cv-header-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .cv-content .role {
+      font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+      letter-spacing: 0.05em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .cv-date {
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      opacity: 0.38;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cv-content .org {
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin: 0.18rem 0 0.3rem;
+    }
+
+    .cv-content p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      margin: 0;
+      opacity: 0.6;
+    }
+
+    .pdf-link {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+    }
+
+    .pdf-link:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+  <a href="menu.html" class="back-link">← Back</a>
+
+  <div class="page-wrapper">
+    <h1>CV</h1>
+
+    <div class="cv-section">
+      <h2>Experience</h2>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/stanford.edu" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Visiting Researcher</div>
+            <div class="cv-date">01/2026 – Present</div>
+          </div>
+          <div class="org">Stanford University &nbsp;·&nbsp; Stanford, California, USA</div>
+          <p>Predictive models for robotic spine X-ray imaging optimization.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/siemens-healthineers.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Research Year</div>
+            <div class="cv-date">10/2025 – Present</div>
+          </div>
+          <div class="org">Siemens Healthineers &nbsp;·&nbsp; Germany</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/unternehmertum.de" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Visiting Investment Analyst</div>
+            <div class="cv-date">04/2025 – 12/2025</div>
+          </div>
+          <div class="org">UnternehmerTUM &nbsp;·&nbsp; Munich, Germany</div>
+          <p>Technical and market due diligence for pre-seed deep tech investments.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-logo-placeholder"></div>
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Co-Founder AIM Innovate</div>
+            <div class="cv-date">09/2024 – 12/2025</div>
+          </div>
+          <div class="org">OneAIM &nbsp;·&nbsp; Munich, Germany</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/siemens-healthineers.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">R&amp;D X-Ray Physics</div>
+            <div class="cv-date">09/2024 – 10/2025</div>
+          </div>
+          <div class="org">Siemens Healthineers AG &nbsp;·&nbsp; Forchheim, Germany</div>
+          <p>Investigated spectral behavior of high-Z contrast materials in photon-counting CT.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/siemens-healthineers.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">R&amp;D X-Ray Physics</div>
+            <div class="cv-date">03/2024 – 08/2024</div>
+          </div>
+          <div class="org">Siemens Healthineers AG &nbsp;·&nbsp; Forchheim, Germany</div>
+          <p>Developed quantitative iron decomposition pipeline using dual-energy photon-counting CT, validated for non-invasive hepatic iron assessment.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/kaercher.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Consulting Project</div>
+            <div class="cv-date">06/2024 – 08/2024</div>
+          </div>
+          <div class="org">Alfred Kärcher SE &amp; Co. KG &nbsp;·&nbsp; Winnenden, Germany</div>
+          <p>Redesigned and validated product line evaluation framework for a global manufacturer.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-logo-placeholder"></div>
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Consulting Project</div>
+            <div class="cv-date">2022 – 2023</div>
+          </div>
+          <div class="org">Proservation &nbsp;·&nbsp; Start-Up</div>
+          <p>Developed go-to-market strategy including market segmentation and competitive positioning.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/ovesco.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">R&amp;D Software Development</div>
+            <div class="cv-date">10/2023 – 02/2024</div>
+          </div>
+          <div class="org">Ovesco Endoscopy AG &nbsp;·&nbsp; Tübingen, Germany</div>
+          <p>Built real-time GUI for image and sensor data visualization of a diagnostic prototype (C++, Qt).</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/ovesco.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">R&amp;D Hardware Development</div>
+            <div class="cv-date">04/2022 – 10/2022</div>
+          </div>
+          <div class="org">Ovesco Endoscopy AG &nbsp;·&nbsp; Tübingen, Germany</div>
+          <p>Designed and iterated medical device prototypes using CAD and 3D printing.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/curevac.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Process Equipment Engineering</div>
+            <div class="cv-date">10/2021 – 03/2022</div>
+          </div>
+          <div class="org">CureVac AG &nbsp;·&nbsp; Tübingen, Germany</div>
+          <p>GMP-compliant documentation of bioreactors and lab equipment in a regulated pharma environment.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/archipro.com" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Marketing and Sales</div>
+            <div class="cv-date">01/2020 – 03/2020</div>
+          </div>
+          <div class="org">ArchiPro &nbsp;·&nbsp; Auckland, New Zealand</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Education</h2>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/tum.de" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">M.Sc. Biomedical Engineering and Medical Physics</div>
+            <div class="cv-date">10/2024 – 10/2026</div>
+          </div>
+          <div class="org">Technical University of Munich &nbsp;·&nbsp; Germany</div>
+          <p>Specializing in Imaging Technologies, Radiation Physics and Medical AI.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/uni-tuebingen.de" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">B.Sc. Medical Technology — Double Degree</div>
+            <div class="cv-date">10/2020 – 08/2024</div>
+          </div>
+          <div class="org">University of Tübingen / University of Stuttgart &nbsp;·&nbsp; Germany</div>
+          <p>Specializing in Medical Imaging and Software Development. Bachelor Thesis at Siemens Healthineers AG.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Volunteering, Awards and Hackathons</h2>
+
+      <div class="cv-entry">
+        <div class="cv-logo-placeholder"></div>
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Vice President / Junior Consultant</div>
+            <div class="cv-date">2022 – 2024</div>
+          </div>
+          <div class="org">InOne Consult e.V.</div>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <img class="cv-logo" src="https://logo.clearbit.com/bayern-innovativ.de" alt="" onerror="this.style.visibility='hidden'">
+        <div class="cv-content">
+          <div class="cv-header-line">
+            <div class="role">Healthcare Hackathon Bayern 2024 — Winner</div>
+            <div class="cv-date">10/2024</div>
+          </div>
+          <div class="org">Bayern Innovativ AG</div>
+          <p>First place — AI motion-tracking system for early prediction of addictive behavior.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uncomment and link your PDF when ready -->
+    <!-- <a class="pdf-link" href="cv.pdf" target="_blank">Download PDF</a> -->
+  </div>
+  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+
+</body>
+</html>

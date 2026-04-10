@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stuff I Build</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project {
+      margin-bottom: 9.5rem;
+    }
+
+    .project-title {
+      font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 0 0.5rem;
+    }
+
+    .outcome {
+      border-left: 2px solid currentColor;
+      padding-left: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .project-tags {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      opacity: 0.35;
+      margin: 0 0 0.6rem;
+      text-transform: uppercase;
+    }
+
+    .project p {
+      margin: 0 0 1rem;
+    }
+
+    /* Image gallery strip */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.8rem;
+    }
+
+    .gallery img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      background: #ebebeb;
+      transition: opacity 0.15s ease;
+      display: block;
+    }
+
+    .gallery img:hover {
+      opacity: 0.65;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.93);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #lb-img {
+      max-width: 88vw;
+      max-height: 78vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    #lb-controls {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      font-family: "Courier New", Courier, monospace;
+      color: #fff;
+    }
+
+    #lb-prev,
+    #lb-next {
+      font-size: 1.3rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.15s ease;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+
+    #lb-prev:hover,
+    #lb-next:hover {
+      opacity: 1;
+    }
+
+    #lb-counter {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      opacity: 0.45;
+      min-width: 4rem;
+      text-align: center;
+    }
+
+    #lb-close {
+      position: fixed;
+      top: 1.4rem;
+      right: 1.8rem;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.15s ease;
+      font-family: "Courier New", Courier, monospace;
+      text-transform: uppercase;
+    }
+
+    #lb-close:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <a href="menu.html" class="back-link">← Back</a>
+
+  <div class="page-wrapper">
+    <h1>Stuff I Build</h1>
+    
+    <div class="project">
+      <div class="project-title">Robotic X-ray trajectory optimization <span style="font-size:0.7em;opacity:0.4;letter-spacing:0.08em">· ongoing</span></div>
+      <div class="project-tags">Physics based prediction models · Robotics</div>
+      <p>Model predicts optimal trajectory of robotic C-arm X-ray system to get best images during spine surgery. 
+        @Stanford University RSL
+      </p>
+      <div class="gallery">
+        <img src="Img/Zeego.jpg" alt="Zeego system" />
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-title">Project Aletea</div>
+      <div class="project-tags">Digital Health · Hackathon</div>
+      <p>Developed a software to predict when patients feel the urge to smoke during withdrawal and trigger a timely behavioral intervention before the craving peaks.</p>
+      <p class="outcome">Built a first proof of concept and won the Healthcare Hackathon Bayern 2024.</p>
+      <div class="gallery">
+        <img src="Img/Aletea1.jfif" alt="Aletea image 1" />
+        <img src="Img/Aletea2.jfif" alt="Aletea image 2" />
+        <img src="Img/Aletea3.jfif" alt="Aletea image 3" />
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-title">Iron quantification in PCCT scans</div>
+      <div class="project-tags">X-ray Physics · CT imaging</div>
+      <p>Developed an algorithm to diagnose hemochromatosis from routine dual-energy PCCT liver scans.</p>
+      <p class="outcome">Detecting iron concentrations down to 2 mg/ml in phantom studies. Enabling disease detection from any standard dual-energy CT liver scan, with no need of current invasive procedures</p>
+      <div class="gallery">
+
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-title">Development of Low Cost HAZEL Actuators</div>
+      <div class="project-tags">Manufacturing</div>
+      <p>Developed a method to explore simple manufacturing of HAZEL actuators using 3D printer.</p>
+      <p class="outcome">Successfully built and tested functional HAZEL actuators within the $30 budget constraint.</p>
+      <div class="gallery">
+        <img src="Img/IMG_20220121_135756.jpg" alt="Project 3, image 3" />
+        <img src="Img/IMG_20220311_165509.jpg" alt="Project 3, image 1" />
+        <img src="Img/IMG_20220311_165505.jpg" alt="Project 3, image 2" />
+        
+      </div>
+    </div>
+    
+    <div class="project">
+      <div class="project-title">Muscle tension control system for robot</div>
+      <div class="project-tags">Robotics</div>
+      <p>Developed a full system using a glove with electrodes to control a robot through muscle tension and hand movement alone.</p>
+      <p class="outcome">Awarded the Paul Hartmann AG high school CS award.</p>
+      <div class="gallery">
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <span id="lb-close">close</span>
+    <img id="lb-img" src="" alt="" />
+    <div id="lb-controls">
+      <span id="lb-prev">←</span>
+      <span id="lb-counter"></span>
+      <span id="lb-next">→</span>
+    </div>
+  </div>
+
+  <script>
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+
+    let gallery = [];
+    let idx = 0;
+
+    function show() {
+      lbImg.src = gallery[idx].src;
+      lbImg.alt = gallery[idx].alt;
+      const n = String(gallery.length).padStart(2, '0');
+      const i = String(idx + 1).padStart(2, '0');
+      lbCounter.textContent = i + ' / ' + n;
+    }
+
+    function open(imgs, i) {
+      gallery = imgs;
+      idx = i;
+      show();
+      lb.style.display = 'flex';
+    }
+
+    document.querySelectorAll('.gallery').forEach(g => {
+      const imgs = Array.from(g.querySelectorAll('img'));
+      imgs.forEach((img, i) => img.addEventListener('click', () => open(imgs, i)));
+    });
+
+    document.getElementById('lb-prev').addEventListener('click', e => {
+      e.stopPropagation();
+      idx = (idx - 1 + gallery.length) % gallery.length;
+      show();
+    });
+
+    document.getElementById('lb-next').addEventListener('click', e => {
+      e.stopPropagation();
+      idx = (idx + 1) % gallery.length;
+      show();
+    });
+
+    document.getElementById('lb-close').addEventListener('click', () => lb.style.display = 'none');
+    lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+
+    document.addEventListener('keydown', e => {
+      if (lb.style.display !== 'flex') return;
+      if (e.key === 'Escape') lb.style.display = 'none';
+      if (e.key === 'ArrowLeft') { idx = (idx - 1 + gallery.length) % gallery.length; show(); }
+      if (e.key === 'ArrowRight') { idx = (idx + 1) % gallery.length; show(); }
+    });
+  </script>
+  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+
+</body>
+</html>

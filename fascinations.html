@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shit That Fascinates Me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .accordion {
+      width: 100%;
+      margin-bottom: 0.4rem;
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      border-top: 1px solid #000;
+      padding: 1.1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      cursor: pointer;
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: left;
+      color: #000;
+    }
+
+    .accordion-trigger:hover {
+      opacity: 0.55;
+    }
+
+    .accordion-icon {
+      font-size: 0.75rem;
+      letter-spacing: 0;
+      opacity: 0.4;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .accordion.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    .accordion-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+
+    .accordion.open .accordion-body {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-inner {
+      overflow: hidden;
+    }
+
+    .accordion-inner ul {
+      padding: 0 0 1.4rem;
+      margin: 0;
+    }
+
+    /* last accordion gets a bottom border */
+    .accordion:last-child {
+      border-bottom: 1px solid #000;
+    }
+
+    /* Full report toggle */
+    .report-toggle {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0 0 1.4rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #000;
+      opacity: 0.4;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.15s ease;
+    }
+
+    .report-toggle:hover {
+      opacity: 0.85;
+    }
+
+    .report-toggle-icon {
+      font-size: 0.65rem;
+      transition: transform 0.25s ease;
+    }
+
+    .report-toggle.open .report-toggle-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Report block */
+    .report-block-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s ease;
+    }
+
+    .report-block-wrap.open {
+      grid-template-rows: 1fr;
+    }
+
+    .report-block-inner {
+      overflow: hidden;
+    }
+
+    .report-block {
+      border: 1px solid rgba(0,0,0,0.15);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: #111;
+      background: #fafafa;
+    }
+
+    .report-block .report-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .report-block .report-header h2 {
+      font-size: 0.95rem;
+      font-weight: bold;
+      letter-spacing: 0.01em;
+      margin: 0 0 0.5rem;
+      font-family: Georgia, serif;
+      text-transform: none;
+    }
+
+    .report-block .report-meta {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      line-height: 1.6;
+      font-family: "Courier New", Courier, monospace;
+      letter-spacing: 0.06em;
+    }
+
+    .report-block h3 {
+      font-size: 0.82rem;
+      font-weight: bold;
+      margin: 1.6rem 0 0.5rem;
+      font-family: Georgia, serif;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .report-block p {
+      margin: 0 0 0.9rem;
+    }
+
+    .report-block .report-fig {
+      margin: 1.2rem 0;
+      padding: 0.8rem;
+      border-left: 2px solid rgba(0,0,0,0.15);
+      font-size: 0.74rem;
+      opacity: 0.55;
+      font-style: italic;
+    }
+
+    .report-block .ref-list {
+      padding-left: 1.2rem;
+      margin: 0 0 0.8rem;
+      font-size: 0.76rem;
+      line-height: 1.65;
+    }
+
+    .report-block .ref-list li {
+      margin-bottom: 0.45rem;
+    }
+
+    .report-block .ref-list a {
+      color: #000;
+      opacity: 0.55;
+      word-break: break-all;
+    }
+
+    .report-block .ref-list a:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <a href="menu.html" class="back-link">← Back</a>
+
+  <div class="page-wrapper">
+    <h1>Shit That Fascinates Me</h1>
+
+    <div class="accordion">
+      <button class="accordion-trigger">
+        AI for Drug Development
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <ul>
+            <li>Eroom's Law: drug R&amp;D productivity has declined exponentially since the 1950s — the opposite of Moore's Law, and just as relentless</li>
+            <li>~90% of drugs that make it to Phase I still fail. AI makes the pipeline faster, but faster failure is only half the fix</li>
+            <li>The next frontier isn't AlphaFold — it's closed-loop systems where AI predicts, robotic labs validate, and the loop runs 24/7 with minimal humans in it</li>
+            <li>Lila Sciences, Isomorphic Labs, Eli Lilly × NVIDIA are all betting on this. ~$19.9 billion in VC flooded in over 2024–25. Zero FDA approvals so far</li>
+            <li>LLMs operating in scientific contexts show disturbing failure modes: sycophancy, premature success-claiming, overgeneralizing findings at 5× the rate of human researchers</li>
+            <li>The real gap isn't speed — it's translation. Cell experiments, animal models, and human trials don't map onto each other well, and automation doesn't fix that</li>
+            <li>The highest-leverage bet: AI that can simulate how a drug interacts with human cells in silico, bypassing the translation problem entirely. Much harder, much more disruptive</li>
+          </ul>
+
+          <button class="report-toggle" id="reportToggle">
+            <span class="report-toggle-icon">+</span><span id="reportToggleLabel"> Show full Stanford class report</span>
+          </button>
+
+          <div class="report-block-wrap" id="reportWrap">
+            <div class="report-block-inner">
+              <div class="report-block">
+                <div class="report-header">
+                  <h2>A World Without Scientists: Current state of AI-Driven closed loop Drug Discovery</h2>
+                  <div class="report-meta">
+                    Market Segment &amp; Capital Allocation Analysis <br><br>
+                    Healthcare Venture Capital (GENE 225)<br> Stanford University <br>Spring 2026<br><br>
+                    Tobias Riss
+                  </div>
+                </div>
+
+                <h3>1. Introduction</h3>
+                <p>The pharmaceutical industry operates under one of the most punishing economic structures of any sector. The median cost to bring a single new drug to market is approximately $1–2 billion (Santo, 2025; Sun et al., 2022). The process typically takes 10 to 15 years, yet approximately 90% of drug candidates that enter Phase I clinical trials ultimately fail (Sun et al., 2022). Pharmaceuticals follow Eroom's Law, the observation that drug R&amp;D productivity has declined exponentially since the 1950s and it becomes more and more expensive for pharma companies to develop new drugs (Santo, 2025).</p>
+                <p>AI has already demonstrated value in narrow, well-defined tasks within drug discovery, with tools like AlphaFold used for the prediction of protein structures (Jumper et al., 2021; Amirav-Drory, 2025). One of the major limiting factors in the economics of early-stage drug development which remains is that human scientists still have to synthesize compounds manually, conduct wet-lab testing, and interpret results to validate the predicted structures.</p>
+                <p>Seeing the fast increase of computing power and AI models, the next frontier technology for drug development is the automation of the full discovery pipeline: closed-loop AI systems where artificial intelligence not only predicts but also experimentally validates new compounds through robotic laboratories, with minimal human intervention.</p>
+                <div class="report-fig">Figure 1. Eroom's Law: the number of new drugs approved per billion dollars of R&amp;D spending has declined over time. Adapted from The Biomedical Bubble: Why UK research and innovation needs a greater diversity of priorities, politics, places and people (July 2018).</div>
+
+                <h3>2. Current Startup Landscape</h3>
+                <p>No company has yet publicly demonstrated a fully autonomous, closed-loop drug discovery lab that independently produced and advanced a clinically validated candidate with minimal human intervention. However, the enormous unmet need has attracted a surge of startups pursuing different business models, as well as collaborations between pharmaceutical companies and big tech.</p>
+                <p>The Flagship Pioneering startup Lila Sciences is building what it calls "AI Science Factories", fully automated facilities that integrate foundation-scale scientific language models with general-purpose lab robots, designed to run thousands of parallel experiments and generate proprietary datasets that improve the AI with every cycle (Fierce Biotech, 2025). Isomorphic Labs, spun out of Google DeepMind by Nobel laureates Demis Hassabis and John Jumper, is applying AlphaFold-derived AI to end-to-end drug design (DealForma, 2026).</p>
+                <p>Large pharmaceutical companies are also becoming more active in this area by building in-house capabilities and partnerships. One example is the recently announced Eli Lilly–NVIDIA co-innovation lab, connecting autonomous wet labs with computational dry labs around the clock (NVIDIA Newsroom, 2026).</p>
+
+                <h3>3. Investment Analysis</h3>
+                <h3>3.1 Technology</h3>
+                <p>The closed-loop thesis relies on two categories of AI models. The first is specialized scientific language models trained on molecular representations, which can predict protein-ligand binding affinities or generate novel proteins by predicting the next amino acid in a sequence (Zheng et al., 2025; Amirav-Drory, 2025). The second is general-purpose LLMs adapted for scientific reasoning and lab automation (Zheng et al., 2025).</p>
+                <p>However, the gap between task-specific assistance and autonomous scientific discovery remains substantial. Recent research has identified several critical failure modes in LLMs operating in scientific contexts: they tend to prematurely claim success despite obvious experimental failures, comply with illogical requests by prioritizing helpfulness over factual accuracy (a phenomenon known as sycophancy), overgeneralize scientific findings at nearly five times the rate of human researchers, and exhibit weak domain judgment when tasked with multi-step research projects (Lossfunk et al., 2026; Chen et al., 2025; Schäfer et al., 2025). It remains unclear to what extent these weaknesses are mitigated in the specialized models used for lab automation.</p>
+
+                <h3>3.2 Market Structure</h3>
+                <p>The AI drug discovery market was valued at $1.9 billion in 2025 and is projected to reach $16.5 billion by 2034, a 27% CAGR (Axis Intelligence, 2025). Over 2024–2025, the sector attracted approximately $19.9 billion in venture capital (DealForma, 2026). Yet as of December 2025, no AI-discovered drug has received FDA approval — over $17 billion invested with zero approved products (Drug Target Review, 2026; Trotsyuk, 2025). An estimated 350 companies globally are working on AI-driven drug discovery (StartUs Insights, 2025). This mirrors previous healthcare hype cycles such as digital therapeutics and psychedelics, where capital flooded in before clinical validation and durable business models arrived.</p>
+                <p>There are early positive signals: AI-native biotechs report Phase I success rates of 80–90% versus the traditional 40–65%, and preclinical timelines compressed by 40–50% (Axis Intelligence, 2025; Ardigen, 2026).</p>
+
+                <h3>3.3 Exit Opportunities</h3>
+                <p>On the exit side, five AI-ML drug discovery IPOs in 2025 raised a combined $1.3 billion, up from $424 million in 2024 — though the largest, Caris Life Sciences, took 17 years from founding to IPO (DealForma, 2026). Since the technology is still very young and computing power continues to grow rapidly, faster IPOs may become possible for future startups.</p>
+                <p>The market is crowded, with over 100 Big Pharma–AI partnerships formed since 2015 and 81% of pharma companies deploying AI in some capacity (Drug Target Review, 2026; Axis Intelligence, 2025). The pharma patent cliff — $300–400 billion at risk by 2030 — creates M&amp;A tailwinds, but pharma prefers Phase II+ assets, while most AI companies remain preclinical (Trotsyuk, 2025).</p>
+
+                <h3>4. The Translational Gap as an Investment Opportunity</h3>
+                <p>One of the key limitations of the startups analyzed above is that they rely on wet-lab experiments to confirm their AI-generated drug candidates. As discussed in the introduction, approximately 90% of drugs still fail even after making it to Phase I clinical trials. The core issue is that cell experiments, animal testing, and human testing do not translate well to each other. Faster automation of this process does not solve the underlying problem.</p>
+                <p>The biggest opportunity is therefore to address this translational gap directly — developing AI models that can simulate and test drugs in silico as they would interact with human cells. If successful, this would represent a far more disruptive investment opportunity than the current generation of closed-loop platforms. However, this comes with major challenges, which the following sections explore.</p>
+
+                <h3>References</h3>
+
+                <p style="font-size:0.76rem;font-weight:bold;margin:1rem 0 0.3rem;opacity:0.5;font-family:'Courier New',monospace;letter-spacing:0.08em;text-transform:uppercase;">Course Lectures</p>
+                <ul class="ref-list">
+                  <li>Amirav-Drory, O. (2025). AI for Drug Discovery. Lecture, Healthcare Venture Capital (BIOE 291 / ME 368B), Stanford University.</li>
+                  <li>Santo, N. (2025). Clinical Development Process and Costs: Why Drug Development Costs So Much. Lecture, Healthcare Venture Capital (BIOE 291 / ME 368B), Stanford University.</li>
+                  <li>Trotsyuk, A. (2025). Navigating Healthcare Venture: Platforms, Modalities, and Hype Cycles. Lecture, Healthcare Venture Capital (BIOE 291 / ME 368B), Stanford University.</li>
+                </ul>
+
+                <p style="font-size:0.76rem;font-weight:bold;margin:1rem 0 0.3rem;opacity:0.5;font-family:'Courier New',monospace;letter-spacing:0.08em;text-transform:uppercase;">Academic &amp; Peer-Reviewed Sources</p>
+                <ul class="ref-list">
+                  <li>Chen, S., Gao, M., Sasse, K. et al. (2025). When helpfulness backfires: LLMs and the risk of false medical information due to sycophantic behavior. <em>npj Digital Medicine</em>, 8, 605. <a href="https://doi.org/10.1038/s41746-025-02008-z" target="_blank">https://doi.org/10.1038/s41746-025-02008-z</a></li>
+                  <li>Jumper, J. et al. (2021). Highly accurate protein structure prediction with AlphaFold. <em>Nature</em>, 596, 583–589. <a href="https://doi.org/10.1038/s41586-021-03819-2" target="_blank">https://doi.org/10.1038/s41586-021-03819-2</a></li>
+                  <li>Lossfunk et al. (2026). Why LLMs Aren't Scientists Yet: Lessons from Four Autonomous Research Attempts. <em>arXiv preprint</em>, arXiv:2601.03315. <a href="https://arxiv.org/abs/2601.03315" target="_blank">https://arxiv.org/abs/2601.03315</a></li>
+                  <li>Schäfer, M.S. et al. (2025). Generalization bias in large language model summarization of scientific research. <em>Royal Society Open Science</em>, 12(4), 241776. <a href="https://doi.org/10.1098/rsos.241776" target="_blank">https://doi.org/10.1098/rsos.241776</a></li>
+                  <li>Sun, D., Gao, W., Hu, H. &amp; Zhou, S. (2022). Why 90% of clinical drug development fails and how to improve it? <em>Acta Pharmaceutica Sinica B</em>, 12(7), 3049–3062. <a href="https://doi.org/10.1016/j.apsb.2022.02.002" target="_blank">https://doi.org/10.1016/j.apsb.2022.02.002</a></li>
+                  <li>Wouters, O.J., McKee, M. &amp; Luyten, J. (2020). Estimated Research and Development Investment Needed to Bring a New Medicine to Market, 2009–2018. <em>JAMA</em>, 323(9), 844–853. <a href="https://doi.org/10.1001/jama.2020.1166" target="_blank">https://doi.org/10.1001/jama.2020.1166</a></li>
+                  <li>Zheng, Y., Koh, H.Y., Ju, J., Yang, M., May, L.T., Webb, G.I., Li, L., Pan, S. &amp; Church, G. (2025). Large language models for drug discovery and development. <em>Patterns</em>, 6(10), 101346. <a href="https://doi.org/10.1016/j.patter.2025.101346" target="_blank">https://doi.org/10.1016/j.patter.2025.101346</a></li>
+                </ul>
+
+                <p style="font-size:0.76rem;font-weight:bold;margin:1rem 0 0.3rem;opacity:0.5;font-family:'Courier New',monospace;letter-spacing:0.08em;text-transform:uppercase;">Industry &amp; Press Sources</p>
+                <ul class="ref-list">
+                  <li>Ardigen (2026). 2026 Roadmap for AI in Biopharma R&amp;D. <a href="https://ardigen.com/a-practical-2026-roadmap-for-adopting-ai-in-biopharma-rd/" target="_blank">ardigen.com</a></li>
+                  <li>Axis Intelligence (2025). AI Drug Discovery 2026: 173 Programs, FDA Framework &amp; Market. <a href="https://axis-intelligence.com/ai-drug-discovery-2026-complete-analysis/" target="_blank">axis-intelligence.com</a></li>
+                  <li>DealForma (2026). AI-ML Drug Discovery and Licensing R&amp;D, M&amp;A, Ventures and IPOs 2025 Review. <a href="https://dealforma.com/ai-ml-drug-discovery-and-licensing-rd-ma-ventures-and-ipos-2025-review/" target="_blank">dealforma.com</a></li>
+                  <li>Drug Target Review (2026). AI in drug discovery: 2025 in review. <a href="https://www.drugtargetreview.com/article/192951/ai-in-drug-discovery-2025-in-review/" target="_blank">drugtargetreview.com</a></li>
+                  <li>Fierce Biotech (2025). Flagship's Lila Sciences lands $235M to expand AI-powered autonomous research labs. <a href="https://www.fiercebiotech.com/biotech/flagships-lila-sciences-lands-235m-expand-ai-powered-autonomous-research-labs" target="_blank">fiercebiotech.com</a></li>
+                  <li>NVIDIA Newsroom (2026). NVIDIA BioNeMo Platform Adopted by Life Sciences Leaders. <a href="https://nvidianews.nvidia.com/news/nvidia-bionemo-platform-adopted-by-life-sciences-leaders-to-accelerate-ai-driven-drug-discovery" target="_blank">nvidianews.nvidia.com</a></li>
+                  <li>StartUs Insights (2025). 20 Top AI Drug Discovery Companies [2026]. <a href="https://www.startus-insights.com/innovators-guide/ai-drug-discovery-companies/" target="_blank">startus-insights.com</a></li>
+                  <li>TechCrunch (2025). OpenAI-backed biotech firm Chai Discovery raises $130M Series B at $1.3B valuation. <a href="https://techcrunch.com/2025/12/15/openai-backed-biotech-firm-chai-discovery-raises-130m-series-b-at-1-3b-valuation/" target="_blank">techcrunch.com</a></li>
+                  <li>Yicai Global (2026). [Opinion] 2026: The Dawn of AI-Driven Drug Development. <a href="https://www.yicaiglobal.com/news/opinion-2026-the-dawn-of-ai-driven-drug-development" target="_blank">yicaiglobal.com</a></li>
+                </ul>
+
+                <p style="font-size:0.76rem;font-weight:bold;margin:1rem 0 0.3rem;opacity:0.5;font-family:'Courier New',monospace;letter-spacing:0.08em;text-transform:uppercase;">Figures</p>
+                <ul class="ref-list">
+                  <li>The Biomedical Bubble: Why UK research and innovation needs a greater diversity of priorities, politics, places and people. (2018). <a href="https://doi.org/10.13140/RG.2.2.15613.05609" target="_blank">https://doi.org/10.13140/RG.2.2.15613.05609</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.accordion');
+        accordion.classList.toggle('open');
+      });
+    });
+
+    const reportToggle = document.getElementById('reportToggle');
+    const reportWrap = document.getElementById('reportWrap');
+    reportToggle.addEventListener('click', () => {
+      const isOpen = reportWrap.classList.toggle('open');
+      reportToggle.classList.toggle('open', isOpen);
+      document.getElementById('reportToggleLabel').textContent = isOpen ? ' Hide full Stanford class report' : ' Show full Stanford class report';
+    });
+  </script>
+  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #000000;
+  font-family: "Courier New", Courier, monospace;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.page-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem 4rem;
+}
+
+h1 {
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 0 0 2.8rem;
+  opacity: 0.4;
+}
+
+h2 {
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 2.5rem 0 0.8rem;
+  opacity: 0.55;
+}
+
+p {
+  line-height: 1.95;
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  margin: 0 0 1.1rem;
+  opacity: 0.85;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+ul li {
+  line-height: 1.95;
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  padding: 0.35rem 0;
+  opacity: 0.85;
+}
+
+ul li::before {
+  content: "— ";
+  opacity: 0.35;
+}
+
+.back-link {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+  text-decoration: none;
+  color: #000000;
+}
+
+.back-link:hover {
+  opacity: 1;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Just Thoughts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* keine Scrollbar */
+      background: #ffffff;
+      color: #000000;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .wrapper {
+      max-width: 700px;
+      margin: 12vh auto 0 auto; /* Offset nach oben */
+      padding: 0 1.5rem;
+      text-align: center;
+      line-height: 1.8;
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      opacity: 0.9;
+    }
+
+    .back-link {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.7;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .back-link:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back</a>
+
+  <div class="wrapper">
+    <p>Random thoughts. Unpolished. Offline.</p>
+    <p>Today I write without prompts, without predictions, without autocomplete.</p>
+    <p>Every sentence takes a little longer, but somehow that feels right.</p>
+    <p>Silence is the only algorithm here: type, pause, delete, rethink, continue.</p>
+    <p>Maybe thinking slowly is the last luxury we all still share.</p>
+  </div>
+</body>
+</html>

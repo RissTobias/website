@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-start; /* links only as wide as their text */
+    }
+
+    nav a {
+      position: relative; /* needed for SVG overlay */
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    nav a.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    nav a:hover {
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+  <!-- Shared SVG filter: adds fine ink-roughness to the red stroke -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="rough" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.075" numOctaves="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"
+          xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <nav id="nav">
+    <a href="about.html">Hi, That's Me</a>
+    <a href="cv.html">CV</a>
+    <a href="projects.html">Stuff I Build</a>
+    <a href="fascinations.html">Shit That Fascinates Me</a>
+  </nav>
+
+  <script>
+    // ── Nav fade-in ───────────────────────────────────────────────────
+    document.querySelectorAll('#nav a').forEach((a, i) => {
+      setTimeout(() => a.classList.add('visible'), 100 + i * 180);
+    });
+
+    // ── Hand-drawn red border on hover ────────────────────────────────
+    // A fresh random wobbly path is generated on every mouseenter,
+    // so the shape is never the same twice.
+    const configs = [
+      { px: 20, py: 14, numPts:  9, rMin: 0.82, rMax: 1.18, aJitter: 0.40 }, // About Me
+      { px: 16, py: 18, numPts:  8, rMin: 0.74, rMax: 1.26, aJitter: 0.65 }, // CV
+      { px: 22, py: 13, numPts: 11, rMin: 0.80, rMax: 1.20, aJitter: 0.30 }, // Projects
+      { px: 18, py: 15, numPts: 10, rMin: 0.78, rMax: 1.22, aJitter: 0.52 }, // Fascinations
+    ];
+
+    // Scatter numPts around an oval, then connect with a Catmull-Rom spline
+    function wobblyPath(cx, cy, rx, ry, numPts, rMin, rMax, aJitter) {
+      const pts = [];
+      for (let k = 0; k < numPts; k++) {
+        const base = (k / numPts) * Math.PI * 2 - Math.PI / 2;
+        const aOff = (Math.random() - 0.5) * (Math.PI * 2 / numPts) * aJitter;
+        const r    = rMin + Math.random() * (rMax - rMin);
+        pts.push({
+          x: cx + rx * r * Math.cos(base + aOff),
+          y: cy + ry * r * Math.sin(base + aOff),
+        });
+      }
+      // Catmull-Rom → cubic bezier closed loop (t = tension)
+      const n = pts.length, t = 0.22;
+      let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+      for (let i = 0; i < n; i++) {
+        const p0 = pts[(i - 1 + n) % n];
+        const p1 = pts[i];
+        const p2 = pts[(i + 1) % n];
+        const p3 = pts[(i + 2) % n];
+        const cp1x = (p1.x + (p2.x - p0.x) * t).toFixed(1);
+        const cp1y = (p1.y + (p2.y - p0.y) * t).toFixed(1);
+        const cp2x = (p2.x - (p3.x - p1.x) * t).toFixed(1);
+        const cp2y = (p2.y - (p3.y - p1.y) * t).toFixed(1);
+        d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+      }
+      return d + 'Z';
+    }
+
+    const NS = 'http://www.w3.org/2000/svg';
+
+    document.querySelectorAll('#nav a').forEach((link, i) => {
+      const cfg = configs[i] || configs[0];
+      const W   = link.offsetWidth  + cfg.px * 2;
+      const H   = link.offsetHeight + cfg.py * 2;
+      const cx  = W / 2, cy = H / 2;
+      const rx  = W / 2 - 5, ry = H / 2 - 5;
+
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('width',  W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = [
+        `position:absolute`,
+        `left:-${cfg.px}px`,
+        `top:-${cfg.py}px`,
+        `overflow:visible`,
+        `pointer-events:none`,
+        `opacity:0`,
+        `transition:opacity 0.12s ease`,
+      ].join(';');
+
+      const pathEl = document.createElementNS(NS, 'path');
+      pathEl.setAttribute('fill',            'none');
+      pathEl.setAttribute('stroke',          '#c80000');
+      pathEl.setAttribute('stroke-width',    '2.8');
+      pathEl.setAttribute('stroke-linecap',  'round');
+      pathEl.setAttribute('stroke-linejoin', 'round');
+      pathEl.setAttribute('filter',          'url(#rough)');
+      svg.appendChild(pathEl);
+      link.appendChild(svg);
+
+      link.addEventListener('mouseenter', () => {
+        // New random shape + slight random tilt on every hover
+        const tilt = (Math.random() - 0.5) * 5;
+        svg.style.transform       = `rotate(${tilt}deg)`;
+        svg.style.transformOrigin = 'center center';
+
+        pathEl.setAttribute('d', wobblyPath(cx, cy, rx, ry,
+          cfg.numPts, cfg.rMin, cfg.rMax, cfg.aJitter));
+
+        const len = pathEl.getTotalLength();
+        pathEl.style.transition       = 'none';
+        pathEl.style.strokeDasharray  = len;
+        pathEl.style.strokeDashoffset = len;
+
+        // Force reflow so the reset lands before the transition kicks in
+        void pathEl.getBoundingClientRect();
+
+        pathEl.style.transition       = 'stroke-dashoffset 0.5s ease';
+        pathEl.style.strokeDashoffset = '0';
+        svg.style.opacity = '1';
+      });
+
+      link.addEventListener('mouseleave', () => {
+        svg.style.opacity = '0';
+      });
+    });
+
+
+  </script>
+  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+
+</body>
+</html>

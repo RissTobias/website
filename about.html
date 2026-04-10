@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hi, That's Me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-wrapper {
+      text-align: center;
+    }
+
+    .photo-frame {
+      position: relative;
+      display: inline-block;
+      max-width: 70%;
+      margin: 0 auto 2.5rem;
+    }
+
+    .profile-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: grayscale(100%);
+    }
+  </style>
+</head>
+<body>
+  <a href="menu.html" class="back-link">← Back</a>
+
+  <div class="page-wrapper">
+    <h1>Tobias Riss</h1>
+    <br>
+    <br>
+    <div class="photo-frame">
+      <img class="profile-img" src="Img/Img_AboutMe.jpg" alt="Profile photo" />
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+   
+
+    <p>
+
+    <strong>Start by curiosity. Flourish by indulgence.</strong>
+    </p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>
+    This is my philosophy, what I stand for, what drives me.
+
+    </p>
+    <br>
+      <br>
+    <br>
+    <p>
+    I was always fascinated of how organic and technical things work. I wanted to study both disciplines what got me into medical engineering. Now a few years later, I perform research on AI models for Siemens Healthineers at Stanford University as part of my Master thesis project.
+
+    But for me even the best ideas only have an impact when they are brought to market.
+    </p>
+    <br>
+    <br>
+    
+    <p>
+    Business understanding and an economical way of thinking became equally important and I sharpened my skills in consulting and venture capital positions. But my real passion lies in entrepreneurship, strategizing and building things by myself.
+    </p>
+    <br>
+    <br>
+    <p>
+    I enjoy working on software and robotics projects in my free time and co-founded AIM Innovate, a program for students in Germany where they can learn about the process from the idea to a certified product on the market.
+    </p>
+    <br>
+    <br>
+    <br>
+    <p>
+    Currently I am curious about AI-based classification and preprocessing of unstructured medical data for training of AI models and Generative Engine Optimization for personal brands.
+        </p>
+        <br>
+    <br>
+    <br>
+    <br>
+    
+
+    <p style="margin-top:2.5rem;font-size:0.78rem;letter-spacing:0.12em;opacity:0.5;">
+      <a href="https://linkedin.com/in/tobias-riß-92a96b181" target="_blank" style="color:inherit;">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:tobias.riss01@gmail.com" style="color:inherit;">tobias.riss01@gmail.com</a>
+    </p>
+  </div>
+
+  <!-- Roughness filter — same params as menu -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="rough-corner" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.075" numOctaves="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"
+          xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <script>
+    const NS    = 'http://www.w3.org/2000/svg';
+    const frame = document.querySelector('.photo-frame');
+    const GAP   = 20;   // px gap between image edge and elbow
+    const ARM   = 26;   // arm length
+    const OFF   = GAP + ARM;  // total SVG canvas from image corner outward
+    const SIZE  = OFF * 2;    // SVG canvas big enough for both corners
+
+    function wobblyPts(x1, y1, x2, y2, n) {
+      const pts = [];
+      for (let k = 0; k <= n; k++) {
+        const t = k / n;
+        pts.push({
+          x: x1 + (x2 - x1) * t + (Math.random() - 0.5) * 2.5,
+          y: y1 + (y2 - y1) * t + (Math.random() - 0.5) * 2.5,
+        });
+      }
+      return pts;
+    }
+
+    function ptsToPath(pts) {
+      const n = pts.length, ten = 0.28;
+      let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+      for (let i = 0; i < n - 1; i++) {
+        const p0 = i > 0     ? pts[i - 1] : pts[0];
+        const p1 = pts[i];
+        const p2 = pts[i + 1];
+        const p3 = i < n - 2 ? pts[i + 2] : pts[n - 1];
+        const cp1x = (p1.x + (p2.x - p0.x) * ten).toFixed(1);
+        const cp1y = (p1.y + (p2.y - p0.y) * ten).toFixed(1);
+        const cp2x = (p2.x - (p3.x - p1.x) * ten).toFixed(1);
+        const cp2y = (p2.y - (p3.y - p1.y) * ten).toFixed(1);
+        d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    function makePath(pts) {
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('fill',            'none');
+      path.setAttribute('stroke',          '#c80000');
+      path.setAttribute('stroke-width',    '2.8');
+      path.setAttribute('stroke-linecap',  'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('filter',          'url(#rough-corner)');
+      path.setAttribute('d', ptsToPath(pts));
+      return path;
+    }
+
+    function makeCornerSvg(cssPos) {
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('width',  SIZE);
+      svg.setAttribute('height', SIZE);
+      svg.style.cssText = `position:absolute;${cssPos};overflow:visible;pointer-events:none;opacity:0`;
+      return svg;
+    }
+
+    function animatePaths(paths) {
+      paths.forEach(path => {
+        const len = path.getTotalLength();
+        path.style.transition       = 'none';
+        path.style.strokeDasharray  = len;
+        path.style.strokeDashoffset = len;
+        void path.getBoundingClientRect();
+        path.style.transition       = 'stroke-dashoffset 0.5s ease';
+        path.style.strokeDashoffset = '0';
+      });
+    }
+
+    // Top-left: elbow GAP px outside image corner, arms point toward image (right + down).
+    const svgTL  = makeCornerSvg(`top:-${OFF}px;left:-${OFF}px`);
+    const tlPaths = [
+      makePath(wobblyPts(ARM, ARM, SIZE, ARM,  6)),
+      makePath(wobblyPts(ARM, ARM, ARM,  SIZE, 6)),
+    ];
+    tlPaths.forEach(p => svgTL.appendChild(p));
+
+    // Bottom-right: elbow GAP px outside image corner, arms point toward image (left + up).
+    const BR = OFF + GAP;  // elbow coordinate in BR SVG
+    const svgBR  = makeCornerSvg(`bottom:-${OFF}px;right:-${OFF}px`);
+    const brPaths = [
+      makePath(wobblyPts(BR, BR, 0,  BR, 6)),
+      makePath(wobblyPts(BR, BR, BR,  0, 6)),
+    ];
+    brPaths.forEach(p => svgBR.appendChild(p));
+
+    frame.appendChild(svgTL);
+    frame.appendChild(svgBR);
+
+    function regenPaths() {
+      tlPaths[0].setAttribute('d', ptsToPath(wobblyPts(ARM, ARM, SIZE, ARM,  6)));
+      tlPaths[1].setAttribute('d', ptsToPath(wobblyPts(ARM, ARM, ARM,  SIZE, 6)));
+      brPaths[0].setAttribute('d', ptsToPath(wobblyPts(BR, BR, 0,  BR, 6)));
+      brPaths[1].setAttribute('d', ptsToPath(wobblyPts(BR, BR, BR,  0, 6)));
+    }
+
+    let jitterTimer = null;
+    function scheduleJitter() {
+      jitterTimer = setTimeout(() => {
+        regenPaths();
+        scheduleJitter();
+      }, 180 + Math.random() * 160);  // every ~180-340 ms
+    }
+
+    frame.addEventListener('mouseenter', () => {
+      regenPaths();
+      svgTL.style.opacity = '0.7';
+      svgBR.style.opacity = '0.7';
+      animatePaths([...tlPaths, ...brPaths]);
+      scheduleJitter();
+    });
+
+    frame.addEventListener('mouseleave', () => {
+      clearTimeout(jitterTimer);
+      jitterTimer = null;
+      svgTL.style.opacity = '0';
+      svgBR.style.opacity = '0';
+    });
+  </script>
+  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+
+</body>
+</html>
