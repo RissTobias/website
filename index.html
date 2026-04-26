@@ -106,25 +106,20 @@
       // Lock-Status für Reihen/Spalten
       const lockedRows = new Array(rows).fill(false);
       const lockedCols = new Array(cols).fill(false);
-      let lockingActive = false; // wird nach 2 Sekunden aktiviert
+      let lockingActive = false;
+      let redirectScheduled = false;
 
       function updateLocks() {
         if (!lockingActive) return;
 
         // Reihen prüfen
         for (let r = 0; r < rows; r++) {
-          if (lockedRows[r]) continue; // schon gelockt
+          if (lockedRows[r]) continue;
           let allOne = true;
           for (let c = 0; c < cols; c++) {
-            const idx = r * cols + c;
-            if (bits[idx].textContent !== "1") {
-              allOne = false;
-              break;
-            }
+            if (bits[r * cols + c].textContent !== "1") { allOne = false; break; }
           }
-          if (allOne) {
-            lockedRows[r] = true;
-          }
+          if (allOne) lockedRows[r] = true;
         }
 
         // Spalten prüfen
@@ -132,25 +127,24 @@
           if (lockedCols[c]) continue;
           let allOne = true;
           for (let r = 0; r < rows; r++) {
-            const idx = r * cols + c;
-            if (bits[idx].textContent !== "1") {
-              allOne = false;
-              break;
-            }
+            if (bits[r * cols + c].textContent !== "1") { allOne = false; break; }
           }
-          if (allOne) {
-            lockedCols[c] = true;
-          }
+          if (allOne) lockedCols[c] = true;
+        }
+
+        // Wenn alle Reihen oder alle Spalten gelockt sind → alles auf 1 → weiterleiten
+        if (!redirectScheduled && (lockedRows.every(v => v) || lockedCols.every(v => v))) {
+          redirectScheduled = true;
+          clearInterval(intervalId);
+          setTimeout(() => { window.location.href = "menu.html"; }, 500);
         }
       }
 
-      // Alle Bits 4x pro Sekunde neu zufällig setzen (50/50),
-      // aber gelockte Reihen/Spalten bleiben auf 1
+      // Alle Bits neu zufällig setzen, gelockte Reihen/Spalten bleiben auf 1
       function randomizeAllBits() {
         for (let r = 0; r < rows; r++) {
           for (let c = 0; c < cols; c++) {
             const idx = r * cols + c;
-
             if (lockedRows[r] || lockedCols[c]) {
               bits[idx].textContent = "1";
             } else {
@@ -158,27 +152,20 @@
             }
           }
         }
-
-        // Nach dem Randomisieren prüfen, ob neue komplette 1er-Reihen/Spalten entstehen
         updateLocks();
       }
 
-      const intervalId = setInterval(randomizeAllBits, 80); // 
+      const intervalId = setInterval(randomizeAllBits, 80);
 
-      // Nach 2 Sekunden: Locking aktivieren und einmal sofort prüfen
+      // Nach 1 Sekunde: Locking aktivieren
       setTimeout(() => {
         lockingActive = true;
         updateLocks();
       }, 1000);
-
-      // Nach insgesamt 4 Sekunden: stoppen & weiterleiten
-      setTimeout(() => {
-        clearInterval(intervalId);
-        window.location.href = "menu.html";
-      }, 3000);
     }
   </script>
-  <!-- MapMyVisitors: paste your tracking code from mapmyvisitors.com below -->
+  <script data-goatcounter="https://tobiasriss.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>

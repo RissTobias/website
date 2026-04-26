@@ -1,0 +1,44 @@
+# Tobias Riss
+
+> Medical engineering researcher, entrepreneur, and builder. Currently a visiting researcher at Stanford University working on AI models for robotic medical imaging with Siemens Healthineers.
+
+## Philosophy
+
+Start by curiosity. Flourish by indulgence.
+
+## Background
+
+- M.Sc. Biomedical Engineering and Medical Physics at Technical University of Munich (specializing in imaging technologies, radiation physics, and medical AI)
+- B.Sc. Medical Technology (double degree), University of Tuebingen / University of Stuttgart
+- Visiting Researcher at Stanford University: predictive models for robotic spine X-ray imaging optimization
+- Research Year at Siemens Healthineers: AI models for medical imaging
+- R&D X-Ray Physics at Siemens Healthineers: iron quantification in photon-counting CT, spectral behavior of contrast materials
+- Visiting Investment Analyst at UnternehmerTUM: technical and market due diligence for pre-seed deep tech investments
+- Co-Founder of AIM Innovate: a program teaching students in Germany how to take an idea to a certified product on the market
+- Consulting projects at Alfred Kaercher SE and Proservation (startup)
+- R&D Software and Hardware Development at Ovesco Endoscopy AG
+- Process Equipment Engineering at CureVac AG
+- Winner of Healthcare Hackathon Bayern 2024: AI motion-tracking system for early prediction of addictive behavior
+
+## Interests
+
+- AI-based classification and preprocessing of unstructured medical data
+- Generative Engine Optimization for personal brands
+- AI for drug discovery and closed-loop autonomous research
+- Software and robotics projects
+- Entrepreneurship and bringing ideas to market
+
+## Contact
+
+- Email: tobias.riss01@gmail.com
+- LinkedIn: https://linkedin.com/in/tobias-ri%C3%9F-92a96b181
+- Website: https://tobiasriss.com
+
+## Pages
+
+- [Home](https://tobiasriss.com/index.html): Landing page
+- [About](https://tobiasriss.com/about.html): Background, philosophy, and contact information
+- [CV](https://tobiasriss.com/cv.html): Full experience and education history
+- [Projects](https://tobiasriss.com/projects.html): Robotic X-ray trajectory optimization, Project Aletea, iron quantification in PCCT, HAZEL actuators, muscle tension robot control
+- [Fascinations](https://tobiasriss.com/fascinations.html): Deep dives into topics like AI for drug development, including a full Stanford class report
+- [Thoughts](https://tobiasriss.com/thoughts.html): Unpolished reflections
