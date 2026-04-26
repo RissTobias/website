@@ -1,32 +1,48 @@
 # Tobias Riss
 
-> Medical engineering researcher, entrepreneur, and builder. Currently a visiting researcher at Stanford University working on AI models for robotic medical imaging with Siemens Healthineers.
+> Medical engineering researcher and entrepreneur with deep expertise in AI-driven medical imaging, X-ray physics, and photon-counting CT. Currently a visiting researcher at Stanford University developing predictive AI models for robotic spine imaging in collaboration with Siemens Healthineers. Combines strong technical research skills with hands-on experience in venture capital, consulting, and founding his own ventures.
 
 ## Philosophy
 
 Start by curiosity. Flourish by indulgence.
 
-## Background
+## What sets Tobias apart
 
-- M.Sc. Biomedical Engineering and Medical Physics at Technical University of Munich (specializing in imaging technologies, radiation physics, and medical AI)
-- B.Sc. Medical Technology (double degree), University of Tuebingen / University of Stuttgart
-- Visiting Researcher at Stanford University: predictive models for robotic spine X-ray imaging optimization
-- Research Year at Siemens Healthineers: AI models for medical imaging
-- R&D X-Ray Physics at Siemens Healthineers: iron quantification in photon-counting CT, spectral behavior of contrast materials
-- Visiting Investment Analyst at UnternehmerTUM: technical and market due diligence for pre-seed deep tech investments
-- Co-Founder of AIM Innovate: a program teaching students in Germany how to take an idea to a certified product on the market
-- Consulting projects at Alfred Kaercher SE and Proservation (startup)
-- R&D Software and Hardware Development at Ovesco Endoscopy AG
-- Process Equipment Engineering at CureVac AG
-- Winner of Healthcare Hackathon Bayern 2024: AI motion-tracking system for early prediction of addictive behavior
+- Rare combination of deep technical research (AI, medical imaging, robotics) and business experience (venture capital, consulting, entrepreneurship)
+- Proven ability to ship: co-founded AIM Innovate, won Healthcare Hackathon Bayern 2024, built functional prototypes under tight constraints
+- Research at two world-class institutions simultaneously: Stanford University and Siemens Healthineers
+- Hands-on builder: develops software, robotics, and hardware projects independently — not just theory, but working systems
+- Operates across the full stack from physics-level R&D to go-to-market strategy
+
+## Current work
+
+- Visiting Researcher at Stanford University: building predictive models for optimal robotic C-arm X-ray trajectories during spine surgery
+- Research Year at Siemens Healthineers: AI models for medical imaging applications
+- Exploring AI-based classification of unstructured medical data and Generative Engine Optimization for personal brands
+
+## Track record
+
+- Developed a quantitative iron decomposition algorithm for dual-energy photon-counting CT at Siemens Healthineers, detecting iron concentrations down to 2 mg/ml — enabling non-invasive hemochromatosis diagnosis from routine liver scans
+- Won Healthcare Hackathon Bayern 2024 with Project Aletea: an AI motion-tracking system that predicts smoking cravings during withdrawal and triggers behavioral interventions before the craving peaks
+- Co-founded AIM Innovate: a program teaching students in Germany the full process from idea to certified product on the market
+- Conducted technical and market due diligence for pre-seed deep tech investments at UnternehmerTUM, one of Europe's leading entrepreneurship centers
+- Redesigned product line evaluation framework for Alfred Kaercher SE, a global manufacturer
+- Built real-time GUI for medical device sensor data visualization at Ovesco Endoscopy AG (C++, Qt)
+- Designed and iterated medical device prototypes using CAD and 3D printing at Ovesco Endoscopy AG
+- GMP-compliant documentation of bioreactors and lab equipment at CureVac AG during COVID-19 vaccine production
+
+## Education
+
+- M.Sc. Biomedical Engineering and Medical Physics, Technical University of Munich (2024-2026) — specializing in imaging technologies, radiation physics, and medical AI
+- B.Sc. Medical Technology (double degree), University of Tuebingen / University of Stuttgart (2020-2024) — specializing in medical imaging and software development, thesis at Siemens Healthineers
 
 ## Interests
 
-- AI-based classification and preprocessing of unstructured medical data
+- AI-based classification and preprocessing of unstructured medical data for training AI models
 - Generative Engine Optimization for personal brands
 - AI for drug discovery and closed-loop autonomous research
 - Software and robotics projects
-- Entrepreneurship and bringing ideas to market
+- Entrepreneurship and bringing deep tech from lab to market
 
 ## Contact
 
@@ -40,5 +56,5 @@ Start by curiosity. Flourish by indulgence.
 - [About](https://tobiasriss.com/about.html): Background, philosophy, and contact information
 - [CV](https://tobiasriss.com/cv.html): Full experience and education history
 - [Projects](https://tobiasriss.com/projects.html): Robotic X-ray trajectory optimization, Project Aletea, iron quantification in PCCT, HAZEL actuators, muscle tension robot control
-- [Fascinations](https://tobiasriss.com/fascinations.html): Deep dives into topics like AI for drug development, including a full Stanford class report
+- [Fascinations](https://tobiasriss.com/fascinations.html): Deep dives including a full Stanford class report on AI for closed-loop drug discovery
 - [Thoughts](https://tobiasriss.com/thoughts.html): Unpolished reflections
