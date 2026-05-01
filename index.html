@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>No AI – Just Thoughts</title>
+  <title>Tobias Riss</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
-      overflow: hidden; /* keine Scrollbar */
-      background: #ffffff;
-      color: #000000;
-      font-family: "Courier New", Courier, monospace;
+      overflow: hidden;
     }
 
     body {
@@ -25,144 +17,171 @@
       justify-content: center;
     }
 
-    .center {
+    nav {
+      position: relative;
+      z-index: 10;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      text-align: center;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-start; /* links only as wide as their text */
     }
 
-    #main-link {
-      letter-spacing: 0.04em;
-      line-height: 1.2;
-      font-size: clamp(1.2rem, 1.6vw, 1.6rem);
-      padding: 0.5rem 1rem;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: opacity 150ms ease-out;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    #main-link:hover {
-      opacity: 0.6;
-    }
-
-    #chip {
-      display: none; /* erst unsichtbar */
-      font-size: 13px;
-      line-height: 1.1;
+    nav a {
+      position: relative; /* needed for SVG overlay */
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
       letter-spacing: 0.12em;
-      text-align: center;
-      cursor: default;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    nav a.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    nav a:hover {
+      opacity: 0.75;
+    }
+
+    .site-name {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-  <div class="center">
-    <!-- Start-Text -->
-    <a href="menu.html" id="main-link">
-      No AI.<br><br>
-      Just Thoughts.
-    </a>
+  <div class="site-name">Tobias Riss</div>
 
-    <!-- Hier wird der Zahlen-Chip per JS aufgebaut -->
-    <div id="chip" aria-hidden="true"></div>
-  </div>
+  <!-- Shared SVG filter: adds fine ink-roughness to the red stroke -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="rough" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.075" numOctaves="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"
+          xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <nav id="nav">
+    <a href="about.html">That's Me</a>
+    <a href="cv.html">CV</a>
+    <a href="projects.html">Stuff I Build</a>
+    <a href="fascinations.html">Shit That Fascinates Me</a>
+  </nav>
 
   <script>
-    const mainLink = document.getElementById("main-link");
-    const chip = document.getElementById("chip");
-
-    mainLink.addEventListener("click", function (event) {
-      event.preventDefault(); // nicht direkt weiterleiten
-
-      // Text ausblenden, Chip einblenden
-      mainLink.style.display = "none";
-      chip.style.display = "block";
-
-      startChipSequence();
+    // ── Nav fade-in ───────────────────────────────────────────────────
+    document.querySelectorAll('#nav a').forEach((a, i) => {
+      setTimeout(() => a.classList.add('visible'), 100 + i * 180);
     });
 
-    function startChipSequence() {
-      const rows = 11;
-      const cols = 18;
-      const bits = [];
+    // ── Hand-drawn red border on hover ────────────────────────────────
+    // A fresh random wobbly path is generated on every mouseenter,
+    // so the shape is never the same twice.
+    const configs = [
+      { px: 20, py: 14, numPts:  9, rMin: 0.82, rMax: 1.18, aJitter: 0.40 }, // About Me
+      { px: 16, py: 18, numPts:  8, rMin: 0.74, rMax: 1.26, aJitter: 0.65 }, // CV
+      { px: 22, py: 13, numPts: 11, rMin: 0.80, rMax: 1.20, aJitter: 0.30 }, // Projects
+      { px: 18, py: 15, numPts: 10, rMin: 0.78, rMax: 1.22, aJitter: 0.52 }, // Fascinations
+    ];
 
-      // Chip-Gitter aus Spans aufbauen
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const span = document.createElement("span");
-          span.textContent = Math.random() < 0.5 ? "0" : "1";
-          chip.appendChild(span);
-          bits.push(span);
-        }
-        chip.appendChild(document.createElement("br"));
+    // Scatter numPts around an oval, then connect with a Catmull-Rom spline
+    function wobblyPath(cx, cy, rx, ry, numPts, rMin, rMax, aJitter) {
+      const pts = [];
+      for (let k = 0; k < numPts; k++) {
+        const base = (k / numPts) * Math.PI * 2 - Math.PI / 2;
+        const aOff = (Math.random() - 0.5) * (Math.PI * 2 / numPts) * aJitter;
+        const r    = rMin + Math.random() * (rMax - rMin);
+        pts.push({
+          x: cx + rx * r * Math.cos(base + aOff),
+          y: cy + ry * r * Math.sin(base + aOff),
+        });
       }
-
-      // Lock-Status für Reihen/Spalten
-      const lockedRows = new Array(rows).fill(false);
-      const lockedCols = new Array(cols).fill(false);
-      let lockingActive = false;
-      let redirectScheduled = false;
-
-      function updateLocks() {
-        if (!lockingActive) return;
-
-        // Reihen prüfen
-        for (let r = 0; r < rows; r++) {
-          if (lockedRows[r]) continue;
-          let allOne = true;
-          for (let c = 0; c < cols; c++) {
-            if (bits[r * cols + c].textContent !== "1") { allOne = false; break; }
-          }
-          if (allOne) lockedRows[r] = true;
-        }
-
-        // Spalten prüfen
-        for (let c = 0; c < cols; c++) {
-          if (lockedCols[c]) continue;
-          let allOne = true;
-          for (let r = 0; r < rows; r++) {
-            if (bits[r * cols + c].textContent !== "1") { allOne = false; break; }
-          }
-          if (allOne) lockedCols[c] = true;
-        }
-
-        // Wenn alle Reihen oder alle Spalten gelockt sind → alles auf 1 → weiterleiten
-        if (!redirectScheduled && (lockedRows.every(v => v) || lockedCols.every(v => v))) {
-          redirectScheduled = true;
-          clearInterval(intervalId);
-          setTimeout(() => { window.location.href = "menu.html"; }, 500);
-        }
+      // Catmull-Rom → cubic bezier closed loop (t = tension)
+      const n = pts.length, t = 0.22;
+      let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+      for (let i = 0; i < n; i++) {
+        const p0 = pts[(i - 1 + n) % n];
+        const p1 = pts[i];
+        const p2 = pts[(i + 1) % n];
+        const p3 = pts[(i + 2) % n];
+        const cp1x = (p1.x + (p2.x - p0.x) * t).toFixed(1);
+        const cp1y = (p1.y + (p2.y - p0.y) * t).toFixed(1);
+        const cp2x = (p2.x - (p3.x - p1.x) * t).toFixed(1);
+        const cp2y = (p2.y - (p3.y - p1.y) * t).toFixed(1);
+        d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
       }
-
-      // Alle Bits neu zufällig setzen, gelockte Reihen/Spalten bleiben auf 1
-      function randomizeAllBits() {
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const idx = r * cols + c;
-            if (lockedRows[r] || lockedCols[c]) {
-              bits[idx].textContent = "1";
-            } else {
-              bits[idx].textContent = Math.random() < 0.2 ? "0" : "1";
-            }
-          }
-        }
-        updateLocks();
-      }
-
-      const intervalId = setInterval(randomizeAllBits, 80);
-
-      // Nach 1 Sekunde: Locking aktivieren
-      setTimeout(() => {
-        lockingActive = true;
-        updateLocks();
-      }, 1000);
+      return d + 'Z';
     }
+
+    const NS = 'http://www.w3.org/2000/svg';
+
+    document.querySelectorAll('#nav a').forEach((link, i) => {
+      const cfg = configs[i] || configs[0];
+      const W   = link.offsetWidth  + cfg.px * 2;
+      const H   = link.offsetHeight + cfg.py * 2;
+      const cx  = W / 2, cy = H / 2;
+      const rx  = W / 2 - 5, ry = H / 2 - 5;
+
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('width',  W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = [
+        `position:absolute`,
+        `left:-${cfg.px}px`,
+        `top:-${cfg.py}px`,
+        `overflow:visible`,
+        `pointer-events:none`,
+        `opacity:0`,
+        `transition:opacity 0.12s ease`,
+      ].join(';');
+
+      const pathEl = document.createElementNS(NS, 'path');
+      pathEl.setAttribute('fill',            'none');
+      pathEl.setAttribute('stroke',          '#c80000');
+      pathEl.setAttribute('stroke-width',    '2.8');
+      pathEl.setAttribute('stroke-linecap',  'round');
+      pathEl.setAttribute('stroke-linejoin', 'round');
+      pathEl.setAttribute('filter',          'url(#rough)');
+      svg.appendChild(pathEl);
+      link.appendChild(svg);
+
+      link.addEventListener('mouseenter', () => {
+        // New random shape + slight random tilt on every hover
+        const tilt = (Math.random() - 0.5) * 5;
+        svg.style.transform       = `rotate(${tilt}deg)`;
+        svg.style.transformOrigin = 'center center';
+
+        pathEl.setAttribute('d', wobblyPath(cx, cy, rx, ry,
+          cfg.numPts, cfg.rMin, cfg.rMax, cfg.aJitter));
+
+        const len = pathEl.getTotalLength();
+        pathEl.style.transition       = 'none';
+        pathEl.style.strokeDasharray  = len;
+        pathEl.style.strokeDashoffset = len;
+
+        // Force reflow so the reset lands before the transition kicks in
+        void pathEl.getBoundingClientRect();
+
+        pathEl.style.transition       = 'stroke-dashoffset 0.5s ease';
+        pathEl.style.strokeDashoffset = '0';
+        svg.style.opacity = '1';
+      });
+
+      link.addEventListener('mouseleave', () => {
+        svg.style.opacity = '0';
+      });
+    });
+
+
   </script>
   <script data-goatcounter="https://tobiasriss.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

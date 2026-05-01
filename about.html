@@ -23,10 +23,20 @@
       height: auto;
       filter: grayscale(100%);
     }
+
+    .philosophy {
+      cursor: default;
+    }
+
+    .hl-underline,
+    .hl-circle {
+      position: relative;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
-  <a href="menu.html" class="back-link">← Back</a>
+  <a href="index.html" class="back-link">← Back</a>
 
   <div class="page-wrapper">
     <h1>Tobias Riss</h1>
@@ -43,7 +53,7 @@
 
     <p>
 
-    <strong>Start by curiosity. Flourish by indulgence.</strong>
+    <strong class="philosophy">Start by <span class="hl-underline">curiosity</span>. Flourish by <span class="hl-circle">indulgence</span>.</strong>
     </p>
     <br>
     <br>
@@ -57,7 +67,8 @@
       <br>
     <br>
     <p>
-    From cryptic organic structures to deterministic technical systems, complex things always fascinated me. I wanted to understand the world around me better, which got me into medical engineering. Now a few years later, I perform research on AI models for Siemens Healthineers at Stanford University as part of my Master thesis project.
+    From intricate biological systems to precise engineered machines, complex things always fascinated me. 
+    That's what brought me into medical engineering, an interdisciplinary field where I could have real impact.
 
     But even the best ideas are worthless if they never reach the market.
     </p>
@@ -65,18 +76,18 @@
     <br>
     
     <p>
-    Business understanding and an economical way of thinking became equally important and I sharpened my skills in consulting and venture capital positions. But my real passion lies in entrepreneurship, strategizing and building things by myself.
+    Business understanding and an economic mindset became equally important. I sharpened my skills in consulting and venture capital positions. But my real passion lies in entrepreneurship, strategizing and building things from the ground up.
     </p>
     <br>
     <br>
     <p>
-    I enjoy working on software and robotics projects in my free time and co-founded AIM Innovate, a program for students in Germany where they learn about the process from the idea to a certified product on the market.
+    I build for the sake of building. Software, robotics, side projects. I also co-founded AIM Innovate, a program that guides students from various backgrounds through the process of taking a raw idea to a certified medical product.
     </p>
     <br>
     <br>
     <br>
     <p>
-    Currently I am curious about AI-based classification and preprocessing of unstructured medical data for training of AI models and Generative Engine Optimization for personal brands.
+    Right now, my curiosity pulls in two directions. AI with real impact in medicine, especially foundation models and the data layer beneath them. And Generative Engine Optimization, helping brands show up in AI answers, not just search results.
         </p>
         <br>
     <br>
@@ -219,6 +230,111 @@
       jitterTimer = null;
       svgTL.style.opacity = '0';
       svgBR.style.opacity = '0';
+    });
+
+    // ── Philosophy hover: underline "curiosity", circle "indulgence" ──
+    const philosophy     = document.querySelector('.philosophy');
+    const underlineSpan  = philosophy.querySelector('.hl-underline');
+    const circleSpan     = philosophy.querySelector('.hl-circle');
+
+    // Underline geometry
+    const U_PAD_X = 4;
+    const U_HEIGHT = 14;
+    const uW = underlineSpan.offsetWidth + U_PAD_X * 2;
+
+    function underlinePts() {
+      const y = 2;
+      return wobblyPts(2, y, uW - 2, y, 8);
+    }
+
+    const svgU = document.createElementNS(NS, 'svg');
+    svgU.setAttribute('width',  uW);
+    svgU.setAttribute('height', U_HEIGHT);
+    svgU.style.cssText = `position:absolute;left:-${U_PAD_X}px;top:100%;overflow:visible;pointer-events:none;opacity:0`;
+    const underlinePath = makePath(underlinePts());
+    svgU.appendChild(underlinePath);
+    underlineSpan.appendChild(svgU);
+
+    // Circle geometry
+    const C_PAD_X = 12;
+    const C_PAD_Y = 8;
+    const cW  = circleSpan.offsetWidth  + C_PAD_X * 2;
+    const cH  = circleSpan.offsetHeight + C_PAD_Y * 2;
+    const ccx = cW / 2, ccy = cH / 2;
+    const crx = cW / 2 - 4, cry = cH / 2 - 2;
+
+    function wobblyClosedPath(cx, cy, rx, ry, numPts, rMin, rMax, aJitter) {
+      const pts = [];
+      for (let k = 0; k < numPts; k++) {
+        const base = (k / numPts) * Math.PI * 2 - Math.PI / 2;
+        const aOff = (Math.random() - 0.5) * (Math.PI * 2 / numPts) * aJitter;
+        const r    = rMin + Math.random() * (rMax - rMin);
+        pts.push({
+          x: cx + rx * r * Math.cos(base + aOff),
+          y: cy + ry * r * Math.sin(base + aOff),
+        });
+      }
+      const n = pts.length, ten = 0.22;
+      let d = `M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+      for (let i = 0; i < n; i++) {
+        const p0 = pts[(i - 1 + n) % n];
+        const p1 = pts[i];
+        const p2 = pts[(i + 1) % n];
+        const p3 = pts[(i + 2) % n];
+        const cp1x = (p1.x + (p2.x - p0.x) * ten).toFixed(1);
+        const cp1y = (p1.y + (p2.y - p0.y) * ten).toFixed(1);
+        const cp2x = (p2.x - (p3.x - p1.x) * ten).toFixed(1);
+        const cp2y = (p2.y - (p3.y - p1.y) * ten).toFixed(1);
+        d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+      }
+      return d + 'Z';
+    }
+
+    const svgC = document.createElementNS(NS, 'svg');
+    svgC.setAttribute('width',  cW);
+    svgC.setAttribute('height', cH);
+    svgC.style.cssText = `position:absolute;left:-${C_PAD_X}px;top:-${C_PAD_Y}px;overflow:visible;pointer-events:none;opacity:0`;
+    const circlePath = document.createElementNS(NS, 'path');
+    circlePath.setAttribute('fill',            'none');
+    circlePath.setAttribute('stroke',          '#c80000');
+    circlePath.setAttribute('stroke-width',    '2.8');
+    circlePath.setAttribute('stroke-linecap',  'round');
+    circlePath.setAttribute('stroke-linejoin', 'round');
+    circlePath.setAttribute('filter',          'url(#rough-corner)');
+    circlePath.setAttribute('d', wobblyClosedPath(ccx, ccy, crx, cry, 10, 0.80, 1.20, 0.45));
+    svgC.appendChild(circlePath);
+    circleSpan.appendChild(svgC);
+
+    function regenPhilPaths() {
+      underlinePath.setAttribute('d', ptsToPath(underlinePts()));
+      circlePath.setAttribute('d',
+        wobblyClosedPath(ccx, ccy, crx, cry, 10, 0.80, 1.20, 0.45));
+    }
+
+    let philJitterTimer = null;
+    function schedulePhilJitter() {
+      philJitterTimer = setTimeout(() => {
+        regenPhilPaths();
+        schedulePhilJitter();
+      }, 180 + Math.random() * 160);
+    }
+
+    philosophy.addEventListener('mouseenter', () => {
+      regenPhilPaths();
+      const tilt = (Math.random() - 0.5) * 4;
+      svgC.style.transform       = `rotate(${tilt}deg)`;
+      svgC.style.transformOrigin = 'center center';
+      svgU.style.opacity = '0.85';
+      svgC.style.opacity = '0.85';
+      animatePaths([underlinePath, circlePath]);
+      schedulePhilJitter();
+    });
+
+    philosophy.addEventListener('mouseleave', () => {
+      clearTimeout(philJitterTimer);
+      philJitterTimer = null;
+      svgU.style.opacity = '0';
+      svgC.style.opacity = '0';
     });
   </script>
   <script data-goatcounter="https://tobiasriss.goatcounter.com/count"

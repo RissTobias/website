@@ -52,7 +52,7 @@ Start by curiosity. Flourish by indulgence.
 
 ## Pages
 
-- [Home](https://tobiasriss.com/index.html): Landing page
+- [Home](https://tobiasriss.com/): Main menu
 - [About](https://tobiasriss.com/about.html): Background, philosophy, and contact information
 - [CV](https://tobiasriss.com/cv.html): Full experience and education history
 - [Projects](https://tobiasriss.com/projects.html): Robotic X-ray trajectory optimization, Project Aletea, iron quantification in PCCT, HAZEL actuators, muscle tension robot control
